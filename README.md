@@ -1,7 +1,6 @@
 # Cybion
-<p align="center"><img src="images.png" alt="Cybot"></p>
-<p align="center"><a href="https://t.me/SrTaylor">Suporte</a></p>
-<p align="center">⚜️<strong>Versão 1.0 | Python 2 ou 3+</strong></p>
+
+<a href="https://t.me/SrTaylor">Suporte </a>
 
 * * *
 ## Informations
