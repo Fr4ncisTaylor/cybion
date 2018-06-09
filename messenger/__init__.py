@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import requests, json
 
+__version__='1.0'
 
 def Keyboard(**kwargs):
 	return kwargs
@@ -9,14 +10,13 @@ class _bot(object):
 	def __init__(self, acess_token, version=2.6):
 		self.acess_token  = acess_token
 		self.version      = version
-
 		
 class Bot(_bot):
 	def __init__(self, acess_token, version=2.6):
 		super(Bot, self).__init__(acess_token, version)
 		self.acess_token = acess_token
 		self.version     = version
-		self.api 		 = "https://graph.facebook.com/v2.6/me/messages?access_token="+self.acess_token
+		self.api         = "https://graph.facebook.com/v2.6/me/messages?access_token="+self.acess_token
 		self.regular     = "REGULAR"
 		self.silent_push = "SILENT_PUSH"
 		self.no_push 	 = "NO_PUSH"
@@ -28,16 +28,8 @@ class Bot(_bot):
 
 	def sendMessage(self, recipient_id, message, button=None):
 		if button == None:
-			payload ={
-						"recipient":{
-					"id":recipient_id
-						},
-			"message":{
-			"text":message
-			}
-			} 
+			payload ={"recipient":{"id":recipient_id},"message":{"text":message}} 
 			return self.sendFacebook(payload)
-
 		else:
 			payload = {
 			  "recipient":{"id":recipient_id},
@@ -53,9 +45,9 @@ class Bot(_bot):
 
 	def send_arquivs(self, recipient_id, url, file_type):
 		payload = {"recipient":{
-					"id":recipient_id},
-				   "message":{"attachment":{"type":file_type,"payload":{
-				   "url":"https://i.imgur.com/ttlb9aj.jpg","is_reusable":True}}}}
+				"id":recipient_id},
+				"message":{"attachment":{"type":file_type,"payload":{
+				"url":"https://i.imgur.com/ttlb9aj.jpg","is_reusable":True}}}}
 		payload = dict(recipient=dict(id=recipient_id), dict(message=dict(attachment=dict(type=file_type, payload=dict(url=url, is_reusable=True)))))
 		return self.sendFacebook(payload)
 
