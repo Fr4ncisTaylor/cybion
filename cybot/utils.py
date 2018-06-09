@@ -174,26 +174,27 @@ class _callback(object):
 		except:
 			self.message_from_language_code = None
 
-#######[ msg . objetos]
+# msg obj
 class Api(_msg):
 
 	def __init__(self, api):
 		super(Api, self).__init__(api)
-
+# callback obj
 class Callback(_callback):
 	def __init__(self, api):
 		super(Callback, self).__init__(api)
-
+# inline obj
 class Inline(_inline):
 	def __init__(self, api):
 		super(Inline, self).__init__(api)
-
-def keyboard(**args):
+# make keyboards
+def keyboard(**kwargs):
 	return json.dumps(args)
 
 def makedict(**kwargs):
 	return kwargs
 
+# returt True, member is adm on chat
 def is_adm(api, cmd='compare'):
 
 	admins = getChatAdministrators(api.chat_id)
@@ -201,20 +202,19 @@ def is_adm(api, cmd='compare'):
 	if cmd == 'compare':
 		if (api.from_id in ListAdm or api.from_id in config.adms):
 			return True
-
 		else:
 			return False
-
 	if cmd == 'list':
 		return ListAdm
-
+	
+# get the operational system 
 def get_sys():
 	os = platform.system()
 	return os
 
 
 
-########[ limpa o terminal ]
+# Clear terminal 
 def clear():
 	if get_sys() == 'Linux':
 		clear = 'clear'
@@ -222,6 +222,7 @@ def clear():
 		clear = 'cls'
 	os.system(clear)
 
+	
 def list_dir(a):
 	if get_sys() == 'Linux':
 		lists = 'ls'
@@ -229,16 +230,17 @@ def list_dir(a):
 		lists = 'dir'
 
 	return os.system('%s %s' %(lists, a))
-########[ encerra o sistema ]
+
+# exit system
 def exit():
 	sys.exit()
 
-########[ faz um banner figlet ]
+# a pyfiglet banner
 def figlet(text, font='doom'):
 	f = pyfiglet.Figlet(font=font)
 	return f.renderText(text)
 
-########[ transforma bytes ]
+# convert filesizes
 def convert(size_bytes):
 	if size_bytes == 0:
 		return "0B"
@@ -249,7 +251,7 @@ def convert(size_bytes):
 	return "%s %s" % (s, size_name[i])
 
 
-#######[ IGNORE MESSAGE ]
+# Ignore Old Messages
 def ignore(api, Max=5):
 	if config.IGNORAR_MSG == True:
 		if (eval(msg(api).date)-int(time.time()))>Max:
@@ -337,7 +339,7 @@ def get_int(ints):
 	else:
 		return False
 
-########[ CALENDARIO ]
+# Calendar
 class data:
 	datas = datetime.datetime.now()
 
@@ -357,18 +359,8 @@ class data:
 	data = "{}/{}/{}".format(dia,mes,ano)
 	datetime = {'time': hora, 'date': data}
 
-##########[ reboot sys]
-def reboot(sleep=2):
+# Reboot script 
+def reboot(sleep=2): # By Lucal Alberto
 	time.sleep(2)
 	os.execl(sys.executable, sys.executable, *sys.argv)
 
-## [ COLOR LETRAS]
-class cor:
-	black   = '\033[900)m'
-	red     = '\033[901m'
-	green   = '\033[902m'
-	yellow  = '\033[903m'
-	blue    = '\033[904m'
-	magenta = '\033[905m'
-	cyan    = '\033[906m'
-	white   = '\033[907m'
