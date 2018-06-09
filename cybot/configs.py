@@ -6,6 +6,7 @@ DEFAULT_DB  = '0' 		 ## data base
 IGNORAR_MSG = True		 ## Ignorar mensagens antigas
 RETURN_DICT = True		 ## Retornar o item "api" como dicionário, ao invés da classe
 
+""" PythonColorize By Tiago Danin <3 """
 ################ COLORIZE
 PREFIX  = '\033['
 B  = 0
