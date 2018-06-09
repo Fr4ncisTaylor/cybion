@@ -9,4 +9,7 @@ def handler(api):
   if api.get('text'):
     bot.sendMessage(99999999, 'Hello World!')
 
-bot.start_webhook(handler)
+url = 'https://my.webhook.url.com'
+bot.start_webhook(webhook_url=url, chat=handler)
+while 1:
+  pass
