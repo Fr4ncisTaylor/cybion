@@ -3,7 +3,6 @@ import platform,os, sys, pyfiglet, math, redis, time, datetime, traceback, json
 from . import configs
 from pprint import pprint
 
-
 class _msg(object):
 	def __init__(self, api, tipo='chat'):
 		self.msg = api
