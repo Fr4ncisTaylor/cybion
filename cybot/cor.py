@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 from . import configs as c
 
+""" Python Colorize By Tiago Danin <3 """
+
 class cor:
 
 	prefix = '\033['
