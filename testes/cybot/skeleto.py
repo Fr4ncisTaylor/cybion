@@ -7,7 +7,7 @@ bot = cybot.instance({'token': 'telegram_api_token'})
 
 def handler(api):
   if api.get('text'):
-    bot.sendMessage(99999999, 'Hello World!')
+    bot.sendMessage(api['chat']['id'], 'Hello World!')
 
 bot.start(handler)
 while True:
