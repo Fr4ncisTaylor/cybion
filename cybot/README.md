@@ -29,13 +29,6 @@ Run a intalation File:
 
 * python 3: `python3 install3.py`
 
-* * *
-
-### ou
-
-* python 2: `nohup python2 cybot/bot.py`
-
-* python 3: `nohup python3 cybot/bot.py`
 
 * * *
 ## Examples:
