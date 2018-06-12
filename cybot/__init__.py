@@ -2,6 +2,7 @@
 
 import urllib3, json, platform, os, sys, pyfiglet, math, redis, time, datetime, traceback
 from threading import Thread
+from . import cor
 from pprint    import pprint
 from . import db, utils, configs
 import flask
@@ -36,7 +37,7 @@ def handler(msg, method,  _type=None):
 			traceback.print_exc()
 		pass
 
-def process(debug, msgs, chat, callback_query, inline_query, chosen_inline_result, shipping_query, pre_checkout_query, edited_message):
+def process(debug, msgs, chat, callback_query=None, inline_query=None, chosen_inline_result=None, shipping_query=None, pre_checkout_query=None, edited_message=None):
 	if debug == True:
 		pprint(msgs)
 	if type(msgs) is dict:
@@ -108,6 +109,7 @@ class instance(_bot):
 	class Th(Thread) :
 		def __init__ (self, msgs, chat, callback_query, inline_query, chosen_inline_result, shipping_query, pre_checkout_query, edited_message):
 			Thread.__init__(self)
+			
 			process(msgs, chat, callback_query, inline_query, chosen_inline_result, shipping_query, pre_checkout_query, edited_message)
 
 	def __init__(self, instancia):
@@ -134,7 +136,7 @@ class instance(_bot):
 			req = req['result']
 			return req
 		elif req.get('error_code'):
-			raise req['description']
+			print(req['description'])
 
 		else:
 			return req
@@ -281,7 +283,7 @@ class instance(_bot):
 
 	def getChatMember(self, chat_id, user_id):
 		payload = locals()
-		return self.request('getChatMembersCount', payload)
+		return self.request('getChatMember', payload)
 
 	def setChatStickerSet(self, chat_id, sticker_set_name):
 		payload = locals()
@@ -396,15 +398,16 @@ class instance(_bot):
 				allowed_updates = None
 				if result != []:
 					for msg in result:
-						t = self.Th(msg, chat, callback_query, inline_query, chosen_inline_result, shipping_query, pre_checkout_query, edited_message)
-						t.daemon = daemon
-						t.start()
+						#t = self.Th(msg, chat, callback_query, inline_query, chosen_inline_result, shipping_query, pre_checkout_query, edited_message)
+						#t.daemon = daemon
+						#t.start()
+						process(msg, chat, callback_query, inline_query, chosen_inline_result, shipping_query, pre_checkout_query, edited_message)
 						try   :offset = msg['update_id'] + 1
 						except:offset = 0
 			except :traceback.print_exc()
 			finally:time.sleep(sleep)
 	def start_webhook(self, webhook_url, chat, callback_query=None, inline_query=None, chosen_inline_result=None, shipping_query=None, pre_checkout_query=None, edited_message=None, debug=None):
-		self.setWebhook(webhook_url)
+		print(cor.lg_red+'Webhook status: '+cor.lg_white+str(self.setWebhook(webhook_url))+cor.lg_green)
 		app = Flask(__name__)
 		@app.route('/webhook/telegram', methods=['POST'])
 		def webhook():		
